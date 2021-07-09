@@ -1,14 +1,44 @@
 package com.ridecell.maps.utils.common
 
-data class Resource<out T> private constructor(val status: Status, val data: T?) {
+import androidx.annotation.NonNull
+import com.ridecell.maps.utils.network.NetworkError
+
+/**
+ * A generic class that holds a value with its loading status.
+ * @param <T>
+</T> */
+data class Resource<ResultType>(
+    var status: Status,
+    var data: ResultType? = null,
+    var networkError: NetworkError? = null
+) {
+
+
 
     companion object {
-        fun <T> success(data: T? = null): Resource<T> = Resource(Status.SUCCESS, data)
+        /**
+         * Creates [Resource] object with `SUCCESS` status and [data].
+         * Returning object of Resource(Status.SUCCESS, data, null)
+         * last value is null so passing it optionally
+         *
+         */
+        fun <ResultType> success(data: ResultType): Resource<ResultType> =
+            Resource(Status.SUCCESS, data, null)
 
-        fun <T> error(data: T? = null): Resource<T> = Resource(Status.ERROR, data)
+        /**
+         * Creates [Resource] object with `LOADING` status to notify
+         * the UI to showing loading.
+         * Returning object of Resource(Status.SUCCESS, null, null)
+         * last two values are null so passing them optionally
+         */
+        fun <ResultType> loading(): Resource<ResultType> = Resource(Status.LOADING, null)
 
-        fun <T> loading(data: T? = null): Resource<T> = Resource(Status.LOADING, data)
+        /**
+         * Creates [Resource] object with `ERROR` status and [message].
+         * Returning object of Resource(Status.ERROR, errorMessage = message)
+         */
+        fun <ResultType> error(message: String?, networkError: NetworkError?): Resource<ResultType> =
+            Resource(Status.ERROR,networkError = networkError)
 
-        fun <T> unknown(data: T? = null): Resource<T> = Resource(Status.UNKNOWN, data)
     }
 }

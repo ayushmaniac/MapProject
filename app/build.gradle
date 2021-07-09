@@ -34,6 +34,15 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
 
         }
+        debug {
+            staging {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                debuggable true
+                buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
+
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

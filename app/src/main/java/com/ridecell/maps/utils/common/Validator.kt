@@ -17,6 +17,7 @@ object Validator {
 
     private const val MIN_PASSWORD_LENGTH = 6
 
+/*
     fun validateLoginFields(email: String?, password: String?): List<Validation> =
         ArrayList<Validation>().apply {
             when {
@@ -36,7 +37,9 @@ object Validator {
             }
         }
 
+*/
 
+/*
 
     fun validateOnlyEmail(email: String?): List<Validation> =
         ArrayList<Validation>().apply {
@@ -52,10 +55,11 @@ object Validator {
 
             }
         }
+*/
 
 
 
-    fun validateOnlyPassword(password: String?): List<Validation> =
+/*    fun validateOnlyPassword(password: String?): List<Validation> =
         ArrayList<Validation>().apply {
 
             when{
@@ -66,7 +70,7 @@ object Validator {
                 else -> add(Validation(Validation.Field.PASSWORD, Resource.success()))
 
             }
-        }
+        }*/
 }
 
 

@@ -2,7 +2,7 @@ package com.ridecell.maps.di.component
 
 import com.ridecell.maps.di.module.ActivityModule
 import com.ridecell.maps.di.scope.ActivityScope
-import com.ridecell.maps.ui.MainActivity
+import com.ridecell.maps.ui.main.MainActivity
 import com.ridecell.maps.ui.splash.SplashActivity
 import dagger.Component
 
