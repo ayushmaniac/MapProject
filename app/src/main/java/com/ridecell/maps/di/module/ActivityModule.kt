@@ -2,6 +2,7 @@ package com.ridecell.maps.di.module
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
+import com.ridecell.maps.data.ApplicationRepository
 import com.ridecell.maps.ui.base.BaseActivity
 import com.ridecell.maps.ui.main.MainViewModel
 import com.ridecell.maps.ui.splash.SplashViewModel
@@ -19,13 +20,15 @@ class ActivityModule(private val baseActivity: BaseActivity<*>) {
 
     @Provides
     fun provideSplashViewModel(
+        applicationRepository: ApplicationRepository
     ): SplashViewModel = ViewModelProvider(
         baseActivity, ViewModelProviderFactory(SplashViewModel::class) {
-            SplashViewModel()
+            SplashViewModel(applicationRepository)
         }).get(SplashViewModel::class.java)
 
     @Provides
     fun provideMainViewModel(
+        applicationRepository: ApplicationRepository
     ): MainViewModel = ViewModelProvider(
         baseActivity, ViewModelProviderFactory(MainViewModel::class) {
             MainViewModel()

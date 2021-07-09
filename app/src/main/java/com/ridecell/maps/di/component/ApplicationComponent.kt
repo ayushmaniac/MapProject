@@ -2,6 +2,7 @@ package com.ridecell.maps.di.component
 
 import android.content.Context
 import com.ridecell.maps.MapsApplication
+import com.ridecell.maps.data.ApplicationRepository
 import com.ridecell.maps.di.module.ApplicationModule
 import com.ridecell.maps.utils.network.NetworkHelper
 import dagger.Component
@@ -14,6 +15,7 @@ interface ApplicationComponent {
     fun inject(application: MapsApplication)
     fun getContext() : Context
     fun getNetworkHelper(): NetworkHelper
+    fun getApplicationRepository() : ApplicationRepository
 
 
 
