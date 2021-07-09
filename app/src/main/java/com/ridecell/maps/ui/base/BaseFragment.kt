@@ -17,6 +17,8 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     @Inject
     lateinit var viewModel: VM
 
+    var rootView : View? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(buildFragmentComponent())
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rootView = view
         setupView(view)
     }
 

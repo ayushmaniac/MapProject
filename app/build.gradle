@@ -3,9 +3,14 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id("androidx.navigation.safeargs")
 }
 
 android {
+    signingConfigs {
+        staging {
+        }
+    }
     compileSdk 30
     buildToolsVersion "30.0.3"
 
@@ -35,14 +40,12 @@ android {
 
         }
         debug {
-            staging {
                 minifyEnabled false
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
                 debuggable true
                 buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
 
             }
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

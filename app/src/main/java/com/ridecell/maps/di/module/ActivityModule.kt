@@ -2,8 +2,9 @@ package com.ridecell.maps.di.module
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
-import com.ridecell.maps.data.ApplicationRepository
+import com.ridecell.maps.data.local.repo.ApplicationRepository
 import com.ridecell.maps.ui.base.BaseActivity
+import com.ridecell.maps.ui.login.ui.LoginRegistrationViewModel
 import com.ridecell.maps.ui.main.MainViewModel
 import com.ridecell.maps.ui.splash.SplashViewModel
 import com.ridecell.maps.utils.viewmodel.ViewModelProviderFactory
@@ -33,4 +34,12 @@ class ActivityModule(private val baseActivity: BaseActivity<*>) {
         baseActivity, ViewModelProviderFactory(MainViewModel::class) {
             MainViewModel()
         }).get(MainViewModel::class.java)
+
+    @Provides
+    fun provideLoginRegistrationViewModel(
+        applicationRepository: ApplicationRepository
+    ): LoginRegistrationViewModel = ViewModelProvider(
+        baseActivity, ViewModelProviderFactory(LoginRegistrationViewModel::class) {
+            LoginRegistrationViewModel()
+        }).get(LoginRegistrationViewModel::class.java)
 }

@@ -1,4 +1,4 @@
-package com.ridecell.maps.data
+package com.ridecell.maps.data.local.repo
 
 import android.content.SharedPreferences
 import com.ridecell.maps.utils.common.Constants
