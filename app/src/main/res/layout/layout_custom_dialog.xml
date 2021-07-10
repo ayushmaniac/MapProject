@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_16"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvSampleLatLong"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:text="Latitude Longitude"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLatLong"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvSampleLatLong"
+        app:layout_constraintTop_toBottomOf="@+id/tvSampleLatLong"
+        tools:text="21'24232" />
+
+
+    <TextView
+        android:id="@+id/tvSampleGeo"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Reversed Geocoding Details"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintStart_toStartOf="@+id/tvLatLong"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatLong" />
+
+
+    <TextView
+        android:id="@+id/tvGeoDetails"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tvSampleGeo"
+        app:layout_constraintTop_toBottomOf="@+id/tvSampleGeo"
+        tools:text="Reversed Geocoding Details" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

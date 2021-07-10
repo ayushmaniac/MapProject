@@ -41,9 +41,9 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
 
     @Provides
     fun provideProfileFragment(
-        applicationRepository: ApplicationRepository
+        userRepository: UserRepository
     ): ProfileViewModel = ViewModelProvider(
         fragment, ViewModelProviderFactory(ProfileViewModel::class) {
-            ProfileViewModel()
+            ProfileViewModel(userRepository)
         }).get(ProfileViewModel::class.java)
 }

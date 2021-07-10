@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id("androidx.navigation.safeargs")
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -20,8 +21,8 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "https://blooming-stream-45371.herokuapp.com/\"")
     }
 
     buildTypes {
@@ -32,20 +33,13 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
 
         }
-        staging {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             debuggable true
             buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
-
         }
-        debug {
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-                debuggable true
-                buildConfigField("String", "BASE_URL", "\"https://blooming-stream-45371.herokuapp.com/\"")
 
-            }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -53,6 +47,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -64,9 +61,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+    implementation files('libs/natty-0.13.jar')
+    implementation files('libs/dateparser-1.0.0.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 
 
     //Retrofit
@@ -81,6 +83,8 @@ dependencies {
     //OkHttp3
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
+
+
 
 
 

@@ -2,6 +2,7 @@ package com.ridecell.maps.di.module
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.github.sisyphsu.dateparser.DateParser
 import com.ridecell.maps.BuildConfig
 import com.ridecell.maps.MapsApplication
 import com.ridecell.maps.utils.network.MapsService
@@ -17,6 +18,10 @@ class ApplicationModule(private val application: MapsApplication) {
 
     @Provides
     fun provideContext() : Context = application
+
+    @Provides
+    @Singleton
+    fun provideDateParser() : DateParser = DateParser.newBuilder().build()
 
     @Singleton
     @Provides

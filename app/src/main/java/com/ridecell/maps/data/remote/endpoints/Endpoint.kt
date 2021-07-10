@@ -4,4 +4,5 @@ object Endpoint {
 
     const val SIGNUP = "api/v2/people/create"
     const val LOGIN = "api/v2/people/authenticate"
+    const val ME = "api/v2/people/me"
 }

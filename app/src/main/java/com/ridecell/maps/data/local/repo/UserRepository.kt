@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.ridecell.maps.data.remote.request.LoginRequestBody
 import com.ridecell.maps.data.remote.request.SignupRequestBody
+import com.ridecell.maps.data.remote.response.ProfileResponse
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.utils.common.Constants
 import com.ridecell.maps.utils.common.Resource
@@ -42,4 +43,12 @@ class UserRepository @Inject constructor(
         preferences.edit().putString(Constants.USER_NAME, userName).apply()
         preferences.edit().putString(Constants.TOKEN, userToken).apply()
     }
+
+    fun getUserProfile(): LiveData<Resource<ProfileResponse>> {
+    return object : NetworkResource<ProfileResponse>(){
+        override fun createCall(): LiveData<Resource<ProfileResponse>> = networkService.getUserProfile(getToken())
+    }.asLiveData()
+    }
+
+    private fun getToken(): String? = preferences.getString(Constants.TOKEN, "")
 }
