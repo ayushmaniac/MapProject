@@ -35,9 +35,8 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
                             else {
                                 try {
                                     val jsonObject = JSONObject(response.errorBody()!!.string())
-                                    val message =  jsonObject.getJSONObject("error").getString("message")
-                                    val code = jsonObject.getInt("code")
-                                    val status = jsonObject.getBoolean("status")
+                                    val message =  jsonObject.getString("message")
+                                    val code = jsonObject.getInt("error_code")
                                     val networkError = NetworkError()
                                     networkError.message =  message
                                     networkError.statusCode = code

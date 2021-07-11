@@ -80,9 +80,15 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnMapReadyCallback, GoogleMa
     }
 
     private fun rotateCameraToCurrentPlace() {
-        googleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(
-            LatLng(lastKnownLocation!!.latitude,
-                lastKnownLocation!!.longitude), 50F))
+        if(lastKnownLocation!=null){
+            googleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 50F))
+        }
+        else
+        {
+            getLocationPermission()
+            getDeviceLocation()
+            updateLocationUI()
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -138,6 +144,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(), OnMapReadyCallback, GoogleMa
                 if (grantResults.isNotEmpty() &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionGranted = true
+                    getDeviceLocation()
                 }
             }
         }

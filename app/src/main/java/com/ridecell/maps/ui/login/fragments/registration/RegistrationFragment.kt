@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.ridecell.maps.R
@@ -153,7 +154,7 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel>(), View.OnClick
                     LoaderUtils.showLoader(requireContext(), false)
                 }
                 Status.ERROR -> {
-                    //ToDo
+                    Toast.makeText(requireContext(), it.networkError?.message, Toast.LENGTH_LONG).show()
                     LoaderUtils.hideLoader()
                 }
                 Status.SUCCESS -> {

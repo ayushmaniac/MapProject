@@ -4,6 +4,7 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.ridecell.maps.R
@@ -134,6 +135,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(), View.OnClickListener {
                     startActivity(intent)
                 }
                 Status.ERROR -> {
+                    Toast.makeText(requireContext(), it.networkError?.message, Toast.LENGTH_LONG).show()
                     LoaderUtils.hideLoader()
                 }
             }
