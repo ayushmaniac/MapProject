@@ -1,11 +1,14 @@
 package com.ridecell.maps.ui.fragments.profile
 
+import android.content.Intent
 import android.view.View
 import com.github.sisyphsu.dateparser.DateParser
 import com.ridecell.maps.R
 import com.ridecell.maps.data.remote.response.ProfileResponse
 import com.ridecell.maps.di.component.FragmentComponent
 import com.ridecell.maps.ui.base.BaseFragment
+import com.ridecell.maps.ui.login.ui.LoginRegistrationActivity
+import com.ridecell.maps.utils.common.DateUtils
 import com.ridecell.maps.utils.common.Status
 import com.ridecell.maps.utils.loader.LoaderUtils
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -18,16 +21,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment<ProfileViewModel>() {
-
-    @Inject
-    lateinit var dateParser : DateParser
-
+class ProfileFragment : BaseFragment<ProfileViewModel>(), View.OnClickListener {
     override fun provideLayoutId(): Int = R.layout.fragment_profile
 
     override fun injectDependencies(fragmentComponent: FragmentComponent) = fragmentComponent.inject(this)
 
     override fun setupView(view: View) {
+        button.setOnClickListener(this)
         getUserProfile(view)
     }
 
@@ -58,8 +58,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     private fun getCalculatedCreatedAtTime(createdAt: String): String {
-        val format = SimpleDateFormat("yy/MM/dd HH:mm:ss")
-        val dateStart = format.format(dateParser.parseDate(createdAt))
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        val dateStart = createdAt
         val dateStop = format.format(Date())
         var d1: Date? = null
         var d2: Date? = null
@@ -69,8 +69,23 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        val timeDifferenceMilliseconds = d1?.time?.minus(d2?.time!!)
+        val timeDifferenceMilliseconds = d2?.time?.minus(d1?.time!!)
         val diffDays: Long = timeDifferenceMilliseconds?.div((60 * 60 * 1000 * 24)) ?: 0
-        return  diffDays.toString()
+        return "$diffDays Day Old"
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.button -> {
+                viewModel.logout()
+                goToLogin()
+            }
+        }
+    }
+
+    private fun goToLogin() {
+        val intent = Intent(requireContext(), LoginRegistrationActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 }

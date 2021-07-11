@@ -6,4 +6,8 @@ import com.ridecell.maps.ui.base.BaseViewModel
 class ProfileViewModel(private val userRepository: UserRepository) : BaseViewModel() {
 
     fun getUser() = userRepository.getUserProfile()
+
+    fun logout() {
+        userRepository.logoutUser()
+    }
 }

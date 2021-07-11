@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.ridecell.maps.data.local.repo.UserRepository
 import com.ridecell.maps.data.remote.request.LoginRequestBody
+import com.ridecell.maps.data.remote.response.PasswordRequirementsResponse
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.ui.base.BaseViewModel
 import com.ridecell.maps.utils.common.*
@@ -20,11 +21,20 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
     val passwordValidation: LiveData<ValidationResource<Int>> =
         filterValidation(Validation.Field.PASSWORD)
 
+     var passwordRequirements : PasswordRequirementsResponse? = null
+
+    fun getPasswordValidations() = Transformations.map(userRepository.getPasswordValidation()){
+        it.data
+    }
 
     private fun filterValidation(string: Validation.Field) = Transformations.map(validationList) {
         it.find { validation -> validation.field == string }
             ?.run { return@run this.resource }
             ?: ValidationResource.unknown()
+    }
+
+    fun setRequirements(requirements: PasswordRequirementsResponse){
+        passwordRequirements = requirements
     }
 
     fun onEmailChanged(email: String) = emailField.postValue(email)
@@ -35,11 +45,16 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
         val email = emailField.value
         val password = passwordField.value
         var liveData = MutableLiveData<Resource<UserResponse>>()
+        var validations : List<Validation>? = null
+        validations = if(passwordRequirements!= null){
+            Validator.validateFullLoginFields(email, password)
 
-        val validations = Validator.validateLoginFields(email, password)
+        } else {
+            Validator.validateLoginFields(email, password)
+
+        }
         validationList.postValue(validations)
-
-        if (validations.isNotEmpty() && email != null && password != null) {
+        if (validations?.isNotEmpty()!! && email != null && password != null) {
             val successfulValidation =
                 validations.filter { it.resource.status == ValidationStatus.SUCCESS }
             if (successfulValidation.size == validations.size) {
@@ -70,4 +85,7 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
     fun saveUser(data: UserResponse?) {
         userRepository.saveUser(data)
     }
+
+
+
 }

@@ -37,9 +37,18 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel>(), View.OnClick
 
     override fun setupView(view: View) {
         navController = Navigation.findNavController(view)
+        getPasswordRequirements()
         setOnClickListener(view)
         setTextWatchers(view)
         setObservers()
+    }
+
+    private fun getPasswordRequirements() {
+        viewModel.getPasswordValidations().observe(this, {
+            if(it!=null){
+                viewModel.setRequirements(it)
+            }
+        })
     }
 
     private fun setObservers() {

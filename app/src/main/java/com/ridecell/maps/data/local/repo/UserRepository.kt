@@ -3,7 +3,10 @@ package com.ridecell.maps.data.local.repo
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.ridecell.maps.data.remote.request.LoginRequestBody
+import com.ridecell.maps.data.remote.request.ResetPasswordBody
 import com.ridecell.maps.data.remote.request.SignupRequestBody
+import com.ridecell.maps.data.remote.response.GeneralResponse
+import com.ridecell.maps.data.remote.response.PasswordRequirementsResponse
 import com.ridecell.maps.data.remote.response.ProfileResponse
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.utils.common.Constants
@@ -51,4 +54,22 @@ class UserRepository @Inject constructor(
     }
 
     private fun getToken(): String? = preferences.getString(Constants.TOKEN, "")
+
+    fun logoutUser() {
+        preferences.edit().putBoolean(Constants.LOGIN_STATUS, false).apply()
+    }
+
+    fun getPasswordValidation(): LiveData<Resource<PasswordRequirementsResponse>> {
+        return object : NetworkResource<PasswordRequirementsResponse>(){
+            override fun createCall(): LiveData<Resource<PasswordRequirementsResponse>> = networkService.getPasswordRequirements()
+        }.asLiveData()
+    }
+
+    fun resetUserPassword(email : String): LiveData<Resource<GeneralResponse>> {
+        return object : NetworkResource<GeneralResponse>(){
+            override fun createCall(): LiveData<Resource<GeneralResponse>> = networkService.doResetPassword(
+                ResetPasswordBody(email)
+            )
+        }.asLiveData()
+    }
 }

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/design_default_color_primary_variant"
+        android:background="@color/colorPrimary"
         android:padding="@dimen/dp_20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -20,7 +20,7 @@
             android:id="@+id/appCompatImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_useer"
+            android:src="@drawable/ic_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,10 +76,13 @@
 
 
     <Button
+        android:id="@+id/button"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_16"
         android:text="@string/logout"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

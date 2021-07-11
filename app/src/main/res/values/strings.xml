@@ -17,6 +17,9 @@
     <string name="password_field_empty">Password can\'t be empty</string>
     <string name="email_field_invalid">Not a valid email</string>
     <string name="password_field_small_length">Password less than 6 digits</string>
+    <string name="password_field_small_length_eight">Password less than 8 digits</string>
+
+    <string name="password_field_full_add">Password should contain one upper case, one lower case, one number and a special character</string>
     <string name="by_tapping_to_login_or_creating_account_you_agree_to_our_terms_and_conditions">By tapping to login or creating account, you agree to our terms and conditions.</string>
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
@@ -28,5 +31,8 @@
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="logout">Logout</string>
+    <string name="forgot_password_header">Forgot Password?</string>
+    <string name="no_worries_we_ll_sort_it_out">No worries! We\'ll sort it out</string>
+    <string name="reset_password">Reset Password</string>
 
 </resources>

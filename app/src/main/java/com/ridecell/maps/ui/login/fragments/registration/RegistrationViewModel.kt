@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.ridecell.maps.data.local.repo.UserRepository
 import com.ridecell.maps.data.remote.request.SignupRequestBody
+import com.ridecell.maps.data.remote.response.PasswordRequirementsResponse
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.ui.base.BaseViewModel
 import com.ridecell.maps.utils.common.*
@@ -21,6 +22,17 @@ class RegistrationViewModel(private val userRepository: UserRepository) : BaseVi
         filterValidation(Validation.Field.EMAIL)
     val passwordValidation: LiveData<ValidationResource<Int>> =
         filterValidation(Validation.Field.PASSWORD)
+
+    var passwordRequirements : PasswordRequirementsResponse? = null
+
+    fun getPasswordValidations() = Transformations.map(userRepository.getPasswordValidation()){
+        it.data
+    }
+
+    fun setRequirements(requirements: PasswordRequirementsResponse){
+        passwordRequirements = requirements
+    }
+
 
 
     private fun filterValidation(string: Validation.Field) = Transformations.map(validationList) {
@@ -39,7 +51,15 @@ class RegistrationViewModel(private val userRepository: UserRepository) : BaseVi
         val email = emailField.value
         val password = passwordField.value
 
-        val validations = Validator.validateSingupFields(email, password, name)
+        var validations : List<Validation>? = null
+
+        validations = if(passwordRequirements!= null){
+            Validator.validateFullSignupFields(email, password, name)
+
+        } else {
+            Validator.validateSingupFields(email, password, name)
+
+        }
         validationList.postValue(validations)
 
          if (validations.isNotEmpty() && email != null && password != null) {

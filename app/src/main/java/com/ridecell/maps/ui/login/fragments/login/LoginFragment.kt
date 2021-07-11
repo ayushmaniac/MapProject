@@ -10,6 +10,7 @@ import com.ridecell.maps.R
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.di.component.FragmentComponent
 import com.ridecell.maps.ui.base.BaseFragment
+import com.ridecell.maps.ui.forgotpassword.ForgotPasswordActivity
 import com.ridecell.maps.ui.main.MainActivity
 import com.ridecell.maps.utils.common.Status
 import com.ridecell.maps.utils.common.ValidationStatus
@@ -29,9 +30,18 @@ class LoginFragment : BaseFragment<LoginViewModel>(), View.OnClickListener {
 
     override fun setupView(view: View) {
         navController = Navigation.findNavController(view)
+        getPasswordRequirements()
         setOnClickListeners(view)
         setTextWatchers(view)
         observeValidation()
+    }
+
+    private fun getPasswordRequirements() {
+        viewModel.getPasswordValidations().observe(this, {
+            if(it!=null){
+                viewModel.setRequirements(it)
+            }
+        })
     }
 
     private fun observeValidation() {
@@ -101,6 +111,11 @@ class LoginFragment : BaseFragment<LoginViewModel>(), View.OnClickListener {
             }
             R.id.buttonRegistration -> {
                 navController?.safeNavigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
+            }
+            R.id.textView -> {
+                //Forgot Password
+                val intent = Intent(requireActivity(), ForgotPasswordActivity::class.java)
+                startActivity(intent)
             }
         }
     }

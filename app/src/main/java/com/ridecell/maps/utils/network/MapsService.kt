@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import com.ridecell.maps.data.local.repo.UserRepository
 import com.ridecell.maps.data.remote.endpoints.Endpoint
 import com.ridecell.maps.data.remote.request.LoginRequestBody
+import com.ridecell.maps.data.remote.request.ResetPasswordBody
 import com.ridecell.maps.data.remote.request.SignupRequestBody
+import com.ridecell.maps.data.remote.response.GeneralResponse
+import com.ridecell.maps.data.remote.response.PasswordRequirementsResponse
 import com.ridecell.maps.data.remote.response.ProfileResponse
 import com.ridecell.maps.data.remote.response.UserResponse
 import com.ridecell.maps.utils.common.Resource
@@ -32,4 +35,10 @@ interface MapsService {
     fun getUserProfile(
         @Header("Authorization") token : String?
     ) : LiveData<Resource<ProfileResponse>>
+
+    @GET(Endpoint.PASSWORD_REQ)
+    fun getPasswordRequirements() : LiveData<Resource<PasswordRequirementsResponse>>
+
+    @POST(Endpoint.RESET_PASSWORD)
+    fun doResetPassword(@Body resetPasswordBody: ResetPasswordBody) : LiveData<Resource<GeneralResponse>>
 }

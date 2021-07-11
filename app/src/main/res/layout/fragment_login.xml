@@ -3,17 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:background="@color/design_default_color_primary_variant"
-        app:layout_constraintBottom_toTopOf="@+id/viewGuideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/viewGuideline"
@@ -27,34 +19,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34"/>
+        app:layout_constraintGuide_percent="0.3"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/tlEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_16"
+        android:backgroundTint="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintTop_toTopOf="@+id/edGuideLine">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:inputType="textEmailAddress"
+            android:padding="@dimen/dp_16"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:hint="@string/enter_your_email"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_16"
         app:layout_constraintTop_toBottomOf="@+id/tlEmail"
+        android:backgroundTint="@android:color/white"
+        android:textColorHint="@android:color/white"
         tools:layout_editor_absoluteX="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -62,20 +60,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:padding="@dimen/dp_16"
+            android:textColorHint="@color/white"
+            android:background="@color/colorPrimary"
             android:hint="@string/enter_your_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="@dimen/dp_0"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="end"
+        android:padding="@dimen/dp_16"
         android:text="@string/forgot_password"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/tlPassword"
-        app:layout_constraintStart_toStartOf="@+id/tlPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tlPassword" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -94,8 +96,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_8"
-        android:backgroundTint="@color/design_default_color_primary_variant"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -104,13 +107,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:padding="@dimen/dp_8"
         android:layout_marginVertical="@dimen/dp_16"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:padding="@dimen/dp_8"
         android:text="@string/don_t_have_an_account_sign_up"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tlPassword" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
